@@ -3,42 +3,63 @@
 class LogIn extends Dbh {
 
     protected function getUser($uname,$upwd){
-        $error = 0;
 
-        $query = "SELECT benutzername, admin,passwort from db_m120_modularbeit.benutzer where benutzername = ?";
-        $stmt = $this->connect()->prepare($query);
+        if(!empty(trim($uname))){
+            $username = trim($uname);
+            echo $username;
 
-        if($stmt===false){
-            $error .= 'prepare() failed '. $this->connect()->error . '<br />';
-        }
 
-        if(!$stmt->bind_param("s", $uname)){
-            $error .= 'bind_param() failed '. $this->connect()->error . '<br />';
-        }
-
-        if(!$stmt->execute()){
-            $error .= 'execute() failed '. $this->connect()->error . '<br />';
-        }
-
-        $result = $stmt->get_result();
-
-        $result = $stmt->get_result();
-        if($result->num_rows){
-            $row = $result->fetch_assoc();
-
-            if(password_verify($upwd, $row["password"])){
-                $_SESSION['login'] = true;
-                $_SESSION['username'] = $row["benutzername"];
-                $_SESSION['firstname'] = $row["vorname"];
-                $_SESSION["lastname"] = $row["nachname"];
-                $_SESSION['admin'] = $row["admin"];
-                if ($row["admin"] == "admin") {
-                    header("location: ../books.php");
-
-                } else {
-                    header("location: ../books.php");
-                }
+            if(!preg_match("/(?=.*[a-z])(?=.*[A-Z])[a-zA-Z]{4,}/", $username) || strlen($username) > 30) {
+                header('Location: ../index.php?msg=31');
             }
+        } else {
+            header('Location: ../index.php?msg=30');
+        }
+
+        if(!empty(trim($upwd))){
+            $password = trim($upwd);
+            echo $password;
+            if(!preg_match("/(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/", $password)){
+                header('Location: ../index.php?msg=41');
+            }
+        } else {
+            header('Location: ../index.php?msg=40');
+        }
+
+        if(empty($error)){
+
+            $mysqli = $this->connect();
+            $stmt = $mysqli->prepare("SELECT benutzername, passwort, admin from db_m120_modularbeit.benutzer where benutzername = ?");
+            $stmt->bind_param("s", $username);
+            $stmt->execute();
+
+            $result = $stmt->get_result();
+
+            if($result->num_rows){
+                $row = $result->fetch_assoc();
+
+                if(password_verify($_POST['pwd'], $row["passwort"])){
+                    $_SESSION['benutzername'] = $row["benutzername"];
+                    $_SESSION['admin'] = $row["admin"];
+
+
+                    if ($row["admin"]) {
+                        header('Location: ../customer.php');
+
+                    } else {
+                        header('Location: ../books.php');
+                    }
+
+                }
+
+
+            } else {
+                header('Location: ../index.php?msg=50');
+            }
+        } else {
+
+
+            header('Location: ../index.php?msg=50');
         }
     }
 }

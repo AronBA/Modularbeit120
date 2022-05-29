@@ -1,12 +1,36 @@
 <?php
 require_once "session.inc.php";
 
+
+
+if (isset($_POST["submit"])){
+
+    $uname = $_POST["uname"];
+    $pwd = $_POST["pwd"];
+
+
+    include "../classes/dbh.class.php";
+    include "../classes/login.class.php";
+    include "../classes/logincontroller.class.php";
+
+    $login = new LogInController($uname,$pwd);
+
+    $login->loginUser();
+}
+
+
+
+
+
+
+
+
+
+
+/*
+
+
 include "../DB_config.php";
-
-
-
-
-
 
 $error = '';
 $message = '';
@@ -88,3 +112,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && empty($error)){
         header('Location: ../index.php?msg=50');
     }
 }
+*/

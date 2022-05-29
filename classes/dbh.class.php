@@ -1,11 +1,11 @@
 <?php
-include "DB_config.php";
+
 class Dbh{
 
-    private  $host = HOST;
-    private  $user = USER;
-    private  $pwd = PASSWORD;
-    private  $dbName = DATABASE;
+    private  $host = "localhost";
+    private  $user = "root";
+    private  $pwd = "";
+    private  $dbName = "db_m120_modularbeit";
 
 
     protected  function connect(){

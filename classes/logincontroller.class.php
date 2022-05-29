@@ -1,16 +1,18 @@
 <?php
 class LogInController extends LogIn {
 
+private $uname;
+private $upwd;
 
     public function __construct($uname,$upwd){
-        $this->loginUser($uname,$upwd);
+        $this->uname =$uname;
+        $this->upwd=$upwd;
     }
 
-    private function loginUser($uname,$upwd){
-        $this->getUser($uname,$upwd);
+    public function loginUser(){
+
+
+    $this->getUser($this->uname,$this->upwd);
+
     }
-
-
-
-
 }
