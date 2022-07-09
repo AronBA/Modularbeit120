@@ -10,8 +10,6 @@ private $upwd;
     }
 
     public function loginUser(){
-
-
     $this->getUser($this->uname,$this->upwd);
 
     }

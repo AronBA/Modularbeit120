@@ -6,14 +6,8 @@ if (isset($_GET["cid"])){
     include "../classes/customer.class.php";
     include "../classes/customercontroller.class.php";
 
-
-
-
-
     $customer = new CustomerController();
     $customer->deleteCustomers($cid);
-
-
     header("location: ../customer.php");
 
 

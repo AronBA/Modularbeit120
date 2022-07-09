@@ -11,5 +11,6 @@ class Customer extends Dbh {
         $this->connect()->query($query);
         header("location: ../../Admin/A_home.php");
 
+
     }
 }

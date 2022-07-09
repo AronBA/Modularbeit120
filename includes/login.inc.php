@@ -14,8 +14,7 @@ if (isset($_POST["submit"])){
     include "../classes/logincontroller.class.php";
 
     $login = new LogInController($uname,$pwd);
-
-    $login->loginUser();
+    $login->loginUser();;
 }
 
 
@@ -97,7 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && empty($error)){
                     header('Location: ../customer.php');
 
                 } else {
-                    header('Location: ../books.php');
+                    header('Location: ../index.php');
                 }
 
             }

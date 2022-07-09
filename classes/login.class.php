@@ -8,7 +8,6 @@ class LogIn extends Dbh {
             $username = trim($uname);
             echo $username;
 
-
             if(!preg_match("/(?=.*[a-z])(?=.*[A-Z])[a-zA-Z]{4,}/", $username) || strlen($username) > 30) {
                 header('Location: ../index.php?msg=31');
             }
@@ -47,7 +46,7 @@ class LogIn extends Dbh {
                         header('Location: ../customer.php');
 
                     } else {
-                        header('Location: ../books.php');
+                        header('Location: ../index.php');
                     }
 
                 }
