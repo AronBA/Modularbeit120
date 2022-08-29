@@ -24,15 +24,18 @@ include "includes/navbar.inc.php"
     <div class="card-columns">
 
         <?php
+
         $book = new BooksView();
 
-        if (isset($_POST["submit"])){
-            $text = $_POST["search"];
-        } else {
-            $text = "%";
+        if (isset($_GET["search"])){
+            $book->showBooks($page,$_GET["search"]);
+        } else if (isset($_GET["fsearch"]))
+        {
+            $book->showBooks($page,$_GET["fsearch"],$_GET["filter"],$_GET["mode"]);
         }
-
-        $book->showBooks($page);
+        else{
+            $book->showBooks($page);
+        }
 
 
         if (isset($_GET["mode"]) && $_GET["mode"] == "info"){

@@ -36,10 +36,12 @@ h6{
 html *{
   color: #f1f1f1;
   font-family: 'Abel';
+
 }
 body {
   font-family: "Lato", sans-serif;
   overflow-x: hidden;
+
 }
 .navbar{
   z-index: 1;

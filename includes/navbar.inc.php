@@ -2,7 +2,7 @@
 <div>
     <nav class="navbar navbar-dark" style="background-color: rgb(22,27,34);">
         <a class="navbar-brand" href="#"><img src="static/img/favicon.png" alt="logo" height="35" width="35">The Bookshop</a>
-        <form class="searchform" method="post" action="index.php">
+        <form class="searchform" method="post" action="includes/search.inc.php">
             <input class="inputsearch" type="search" placeholder="Search" aria-label="Search" name="search">
 
             <button class="submitsearch" type="submit" name="submit">
@@ -21,29 +21,24 @@
 <div class="collapse" id="collapseExample">
     <div class="card card-body" id="filterpanel">
         <div class="filterform">
-            <h1>Filter </h1>
-            <form >
+            <form method="post" action="includes/search.inc.php">
+                <input class="inputsearch" type="search" placeholder="Type Search Query Here!" aria-label="Search" name="search">
 
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Autor</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select>
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Titel</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select>
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Condition</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                <h4>Suchen nach:</h4>
+                <select class="form-select" aria-label="Default select example" name="filter">
+                    <option selected value="1">Autor</option>
+                    <option value="2">Text</option>
+                    <option value="3">Titel</option>
                 </select>
 
-                <button class="btn btn-primary" type="submit">use filter</button>
+                <h4>Sortieren nach:</h4>
+                <select class="form-select" aria-label="Default select example" name="mode">
+                    <option value="asc" selected>Aufsteigend</option>
+                    <option value="desc">Absteigend</option>
+                </select>
+
+
+                <button class="btn btn-primary" type="submit" name="filtersearch">use filter</button>
             </form>
         </div>
 
@@ -137,9 +132,7 @@
                         <br>
                         <button type="submit" class="btn btn-primary" name="submit">Login</button>
                         <br>
-                        <div class="modal-footer">
-                            no acoount? <a href="">register</a>
-                        </div>
+
                     </form>
 
 
